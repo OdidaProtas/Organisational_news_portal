@@ -1,11 +1,8 @@
 package dao;
 
-import models.Departments;
 import models.Users;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-import org.sql2o.Sql2oException;
-
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class Sql2oUsersDao implements UsersDao {
     @Override
     public void add(Users users) {
         try(Connection conn = sql2o.open()){
-            String sql = "INSERT INTO users(title, name, position, role, departmentId) VALUES(:title,:name,:position,:role,:departmentId);";
+            String sql = "INSERT INTO users(title, userName, position, userRole, departmentId) VALUES(:title, :userName, :position, :userRole, :departmentId);";
             int id = (int) conn.createQuery(sql, true)
                     .bind(users)
                     .executeUpdate()
