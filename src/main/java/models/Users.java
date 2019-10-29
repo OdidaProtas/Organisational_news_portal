@@ -5,16 +5,16 @@ import java.util.Objects;
 public class Users {
     private int id;
     private String title;
-    private String name;
+    private String userName;
     private String position;
-    private String role;
+    private String userRole;
     private int departmentId;
 
-    public Users(String title,String name, String position, String role, int departmentId) {
+    public Users(String title,String name, String position, String userRole, int departmentId) {
         this.title = title;
-        this.name = name;
+        this.userName = userRole;
         this.position = position;
-        this.role = role;
+        this.userRole = userRole;
         this.departmentId = departmentId;
     }
 
@@ -22,16 +22,57 @@ public class Users {
         return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Users)) return false;
+        Users users = (Users) o;
+        return getDepartmentId() == users.getDepartmentId() &&
+                getTitle().equals(users.getTitle()) &&
+                getUserName().equals(users.getUserName()) &&
+                getPosition().equals(users.getPosition()) &&
+                getUserRole().equals(users.getUserRole());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getUserName(), getPosition(), getUserRole(), getDepartmentId());
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     public String getPosition() {
@@ -43,11 +84,11 @@ public class Users {
     }
 
     public String getRole() {
-        return role;
+        return userRole;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.userRole = role;
     }
 
     public int getDepartmentId() {
@@ -58,19 +99,4 @@ public class Users {
         this.departmentId = departmentId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Users)) return false;
-        Users users = (Users) o;
-        return getDepartmentId() == users.getDepartmentId() &&
-                getName().equals(users.getName()) &&
-                getPosition().equals(users.getPosition()) &&
-                getRole().equals(users.getRole());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getPosition(), getRole(), getDepartmentId());
-    }
 }
