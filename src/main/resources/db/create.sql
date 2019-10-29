@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS departments_users(
 CREATE TABLE IF NOT EXISTS users(
     id int PRIMARY KEY auto_increment,
     title VARCHAR,
-    name VARCHAR,
+    userName VARCHAR,
     position VARCHAR,
-    role VARCHAR,
+    userRole VARCHAR,
     departmentId int
 );
