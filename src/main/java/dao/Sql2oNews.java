@@ -1,5 +1,6 @@
 package dao;
 
+import models.Departments;
 import models.News;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -78,6 +79,15 @@ public class Sql2oNews implements NewSDao{
                    .executeAndFetch(News.class);
        }
     }
+
+//  public   void addNewsToDepartment(News news, Departments departments){
+//
+//
+//    }
+//
+// public void getAllNewsForDepartment(int id){
+//
+// }
 
 
 }
