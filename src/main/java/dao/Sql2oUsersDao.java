@@ -66,6 +66,7 @@ public class Sql2oUsersDao implements UsersDao {
         try (Connection conn = sql2o.open()) {
             String sql = "SELECT *  FROM users where departmentId = :departmentId;";
             return conn.createQuery(sql)
+                    .addParameter("departmentId", departmentId)
                     .throwOnMappingFailure(false)
                     .executeAndFetch(Users.class);
         }
