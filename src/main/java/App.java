@@ -26,6 +26,25 @@ public class App {
         usersDao = new Sql2oUsersDao(sql2o);
         newsDao = new Sql2oNews(sql2o);
 
+
+        ProcessBuilder process = new ProcessBuilder();
+        int port;
+
+        if (process.environment().get("PORT") != null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+
+        port(port);
+
+
+
+
+
+
+
+
         post("departments/new", "application/json", (req, res)->{
             Departments department = gson.fromJson(req.body(), Departments.class);
             departmentDao.add(department);
