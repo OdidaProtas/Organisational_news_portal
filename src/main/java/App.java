@@ -9,6 +9,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import static spark.Spark.*;
 
+
 public class App {
 
     public  static void main(String[] args){
@@ -18,8 +19,8 @@ public class App {
         Connection conn;
         Gson gson = new Gson();
 
-        String connectionString = "jdbc:h2:~/jadle.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://localhost:5432/organisational_api";
+        Sql2o sql2o = new Sql2o(connectionString, "moringaschool", "pwd");
 
         departmentDao = new Sql2oDepartments(sql2o);
         usersDao = new Sql2oUsersDao(sql2o);
@@ -96,6 +97,23 @@ public class App {
             res.status(201);
             res.type("application/json");
             return gson.toJson(newUser);
+        });
+
+        get("/departments/:id/usersbyDept", "application/json", (req, res)->{
+            res.type("application/json");
+            int departmentId = Integer.parseInt(req.params("id"));
+            Departments departmentToFind = departmentDao.findById(departmentId);
+            if (departmentToFind == null){
+                throw new  Exception();
+            }
+            else if(departmentDao.findById(departmentId).getId()== 0){
+
+                return "{\"message\":\"I'm sorry, but no users listed in this department.\"}";
+
+            }
+            else{
+                return  gson.toJson(departmentDao.getAllUsersForDepartments(departmentId));
+            }
         });
 
     }

@@ -18,8 +18,8 @@ public class Sql2oDepartmentsTest {
 
     @Before
     public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString =  "jdbc:postgresql://localhost:5432/organisational_api_test";
+        Sql2o sql2o = new Sql2o(connectionString, "moringaschool", "pwd");
         newsDao = new Sql2oNews(sql2o);
         departmentsDao = new Sql2oDepartments(sql2o);
         conn = sql2o.open();
@@ -27,6 +27,8 @@ public class Sql2oDepartmentsTest {
 
     @After
     public void teardown() throws Exception{
+        newsDao.clearAll();
+        departmentsDao.clearAll();
         conn.close();
     }
 
