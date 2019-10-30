@@ -5,19 +5,28 @@ import dao.Sql2oUsersDao;
 import models.Departments;
 import models.News;
 import models.Users;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.net.URI;
+
 import static spark.Spark.*;
 
-
 public class App {
+    private static URI dbUri;
+    private static String dblink = "jdbc:postgresql://localhost:5432/organisational_api";
+    static Logger logger = LoggerFactory.getLogger(App.class);
 
     public  static void main(String[] args){
+
         Sql2oDepartments departmentDao;
         Sql2oUsersDao usersDao;
         Sql2oNews newsDao;
         Connection conn;
         Gson gson = new Gson();
+
 
         String connectionString = "jdbc:postgresql://localhost:5432/organisational_api";
         Sql2o sql2o = new Sql2o(connectionString, "moringaschool", "pwd");
@@ -37,11 +46,6 @@ public class App {
         }
 
         port(port);
-
-
-
-
-
 
 
 
